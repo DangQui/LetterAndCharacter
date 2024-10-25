@@ -4,6 +4,12 @@
  */
 package view;
 
+/*
+    Import các lớp cần thiết từ Java và thư viện tùy chỉnh. Bao gồm lớp hỗ trợ kết nối cơ sở dữ liệu, giao diện chính,
+    và các lớp để xử lý bảng (table), com
+
+*/
+
 import database.DatabaseHelper;
 import view.frmMain;
 import java.sql.ResultSet;
@@ -53,8 +59,7 @@ public class frmNhanvien extends javax.swing.JInternalFrame {
                     // Tạo một vector để lưu dũ liệu từng hàng
                     Vector v = new Vector();
                     v.add(resultSet.getString("empId")); // id
-                    String fullName = resultSet.getString("fName") + " " + resultSet.getString("lName");
-                    v.add(fullName);
+                    v.add(resultSet.getString("fullName"));
                     v.add(resultSet.getString("dob"));
                     v.add(resultSet.getString("gender"));
                     v.add(resultSet.getString("pos"));
@@ -95,7 +100,7 @@ public class frmNhanvien extends javax.swing.JInternalFrame {
 
         try {
             DatabaseHelper cn = new DatabaseHelper();
-            int rs = cn.executeQuery("INSERT INTO employees (empId, fName, dob, gender, pos, depId) VALUES (?,?,?,?,?,?)", argv);
+            int rs = cn.executeQuery("INSERT INTO employees (empId, fullName, dob, gender, pos, depId) VALUES (?,?,?,?,?,?)", argv);
             if (rs > 0) {
                 JOptionPane.showMessageDialog(null, "Thêm mới thành công dữ liệu id:" + id);
                 clearText();
